@@ -12,6 +12,5 @@ int main() {
     u[1] += v[1],
     cout << u[0] << endl;
     cout << u[1] << endl;
-    sqrt()
     return 0;
 }

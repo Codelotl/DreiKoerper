@@ -7,34 +7,21 @@
 
 #include <cstdio>
 #include <vector>
-#include <cmath>
-#include <iostream>
-using std::cout;
-using std::endl;
-const double G= 6.674e-11;
-//const double dt=1;
 
-class Gravk { /*Klasse um Gravitationskörper zu initialisieren*/
-public:
-    double posx[2] , posy[2] , velx[2], vely[2];    /*x,y -Vektoren um die Position in 2D anzugeben, velx,vely bietet Platz für
+class Gravk {
+public:       /*Klasse um Gravitationskörper zu initialisieren*/
+    std::vector<double> x, y, vx, vy;    /*x,y,z-Vektoren um die Position in 3D anzugeben, vx,vy,vz bietet Platz für
                                                 * die Geschwindigkeiten*/
     double mass;                                /*mass gibt die Masse des jeweiligen Körpers an*/
-    Gravk(); /*Konstruktor, für die oben genannten Werte wird im Gravk.cpp definiert*/
-    ~Gravk();
-    void setAll(double a, double b, double c,double d, double h); //Set Funktion um einem Körper Werte zuzuweisen
-    double getMass();
-    double getPosx(unsigned t); //Funktion um X-Wert zur Zeit t zu kriegen
-    double getPosy(unsigned t); //Funktion um Y-Wert zur Zeit t zu kriegen
-    double getVelx(unsigned t); //Funktion um X-Geschw. zur Zeit t zu kriegen
-    double getVely(unsigned t); //Funktion um Y-Geschw. zur Zeit t zu kriegen
-    double distance(Gravk a); //Berechnet Abstand von zwei Körpern zur Zeit t
-    double Forcex(Gravk** body, int bcount); //Berechnet Kraft in x-Richtung
-    double Forcey(Gravk** body, int bcount);  //Berechnet Kraft in y-Richtung
-    void setVel(Gravk** body, int bcount, double dt); //Berechnet Geschwindigkeit nach Euler
-    void newPos(double dt); //Berechnet Ort nach Euler
-    void firstPos(Gravk** body, int bcount, double dt); //Erste Iteration, um Verlet anwenden zu können
-    void verPos(Gravk** body, int bcount, double dt); //Berechnet Ort nach Verlet
-    void print(); //Gibt Startparamter/n-1 Ort aus
+    Gravk() {std::vector<double> a = {0}; std::vector<double> b = {0}; std::vector<double> c = {0}; std::vector<double> d = {0};
+            double h= 1.0;} /*Konstruktor, für die oben genannten Werte wird im Gravk.cpp definiert*/
+    void setAll (std::vector<double> a, std::vector<double> b, std::vector<double> c, std::vector<double> d, double h)
+                 {x=a; y=b; vx=c; vy=d; mass=h;} //Set Funktion um einem Körper Werte zuzuweisen
+double getMass() {return mass;}
+double getPosx(int t) {return x[t];} //Funktion um X-Wert zur Zeit t zu kriegen
+double getPosy(int t) {return y[t];} //Funktion um Y-Wert zur Zeit t zu kriegen
+double getVelx(int t) {return vx[t];} //Funktion um X-Geschw. zur Zeit t zu kriegen
+double getVely(int t) {return vy[t];} //Funktion um Y-Geschw. zur Zeit t zu kriegen
 };
 
 

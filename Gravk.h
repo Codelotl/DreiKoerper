@@ -9,6 +9,7 @@
 #include <vector>
 #include <cmath>
 const double G= 6.674e-11;
+const double dt=1.0;
 class Gravk { /*Klasse um Gravitationskörper zu initialisieren*/
 public:
     std::vector<double> x, y, vx, vy;    /*x,y,z-Vektoren um die Position in 3D anzugeben, vx,vy,vz bietet Platz für
@@ -24,11 +25,11 @@ public:
     double getVelx(int t) {return vx[t];} //Funktion um X-Geschw. zur Zeit t zu kriegen
     double getVely(int t) {return vy[t];} //Funktion um Y-Geschw. zur Zeit t zu kriegen
     double distance(Gravk a, int t) {return sqrt(pow((x[t] - a.getPosx(t)),2)+pow((y[t]-a.getPosy(t)),2));} //Berechnet Abstand von zwei Körpern zur Zeit t
-    double forcex(Gravk a, int t) {return (mass*a.getMass()*(x[t]-a.getPosx(t)))/(G*(this->distance(a,t)));}
-    double forcey(Gravk a, int t) {return (mass*a.getMass()*(y[t]-a.getPosy(t)))/(G*(this->distance(a,t)));}
-    void newVel(Gravk a, int t) {vx[t]=vx[t-1]+(this->forcex(a,t)*t)/(mass), vy[t]=vy[t-1]+(this->forcey(a,t)*t)/(mass);}
-    void velAdd(Gravk a,int t) {vx[t]+=vx[t]+(this->forcex(a,t)*t)/(mass), vy[t]+=vy[t]+(this->forcey(a,t)*t)/(mass);}
-    double test(int t) {return getMass();}
+    double forcex(Gravk a, int t) {return (G*mass*a.getMass()*(x[t]-a.getPosx(t)))/pow(this->distance(a,t),3);}
+    double forcey(Gravk a, int t) {return (G*mass*a.getMass()*(y[t]-a.getPosy(t)))/pow(this->distance(a,t),3);}
+    void newVel(Gravk a, int t) {vx[t]=vx[t-1]+(this->forcex(a,t)*dt)/(mass), vy[t]=vy[t-1]+(this->forcey(a,t)*dt)/(mass);}
+    void velAdd(Gravk a,int t) {vx[t]+=vx[t]+(this->forcex(a,t)*dt)/(mass), vy[t]+=vy[t]+(this->forcey(a,t)*dt)/(mass);}
+    double test(int t) {return mass;}
 };
 
 

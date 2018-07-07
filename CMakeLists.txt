@@ -3,4 +3,4 @@ project(DreiKoerper)
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_executable(DreiKoerper main.cpp Gravk.cpp Gravk.h)
+add_executable(DreiKoerper main.cpp Gravk.h)

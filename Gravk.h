@@ -29,6 +29,8 @@ public:
     double forcey(Gravk a, int t) {return (G*mass*a.getMass()*(y[t]-a.getPosy(t)))/pow(this->distance(a,t),3);}
     void newVel(Gravk a, int t) {vx[t]=vx[t-1]+(this->forcex(a,t)*dt)/(mass), vy[t]=vy[t-1]+(this->forcey(a,t)*dt)/(mass);}
     void velAdd(Gravk a,int t) {vx[t]+=vx[t]+(this->forcex(a,t)*dt)/(mass), vy[t]+=vy[t]+(this->forcey(a,t)*dt)/(mass);}
+    void setVel(Gravk a, int t, int bcount) {vx[t]+=vx[t]+(vx[t-1]/bcount)+(this->forcex(a,t)*dt)/(mass),vy[t]+=vy[t]+(vy[t-1]/bcount)+(this->forcey(a,t)*dt)/(mass);} //bcount anzahl der körper -1
+    void newPos(int t) {x[t]+=x[t-1]+vx[t]*t,y[t]+=y[t-1]+vy[t]*t;}
     double test(int t) {return mass;}
 };
 

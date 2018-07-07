@@ -3,6 +3,7 @@
 #include "Gravk.h"
 #include <iostream>
 #include <vector>
+#include <string>
 using std::cout;
 using std::endl;
 int main() {
@@ -16,6 +17,13 @@ int main() {
     Gravk c;
     //v.push_back(2.0);
     //v.push_back(3.0);
+    int bcount=10; //Anzahl der Körper wird hier festgelegt (maximal 26)
+    char body[bcount]; //Hier sollen die Köpernamen durch ein Array durchzählbar werden.
+    int i;
+        for (i=97; i<97+bcount; i++) {
+        body[i-97]=char(i);
+    }
+    // cout << body[0] <<endl; gibt zur Kontrolle "a" aus
     a.setAll(v,v,v,v,m1);
     b.setAll(u,t,v,v,m2);
     c.setAll(t,u,v,v,m1);

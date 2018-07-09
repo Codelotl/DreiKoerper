@@ -6,7 +6,6 @@
 #include <string>
 using std::cout;
 using std::endl;
-
 double mjup=1.899e27;
 int main() {
     Gravk a,b,c;
@@ -15,13 +14,14 @@ int main() {
     scanf("%i",&bcount); //Anzahl der Körper wird eingelesen
     if (bcount==0) {
         bcount = 3;
-       // Gravk body[bcount]={a,b,c}; //Hier sollen die Körpernamen durch ein Array durchzählbar werden.
+       Gravk body[bcount]={a,b,c}; //Hier sollen die Körpernamen durch ein Array durchzählbar werden.
         a.setAll(0,0,0,13000,mjup); //hier müssen noch Anfangsbedingungen rein. Ort: 0 0, v 0 13000 masse 1.899e27
         b.setAll(0,788e6,13000,0,mjup); //hier müssen noch Anfangsbedingungen rein. Ort: 0 788e6, v 13000 0 masse 1.899e27
         c.setAll(788e6,0,0,-13000,mjup); //hier müssen noch Anfangsbedingungen rein. Ort: 788e6 0, v 0 -13000 masse 1.899e27
         a.print(0),b.print(0),c.print(0);
-        a.setVel(b,1,2);
-        a.setVel(c,1,2);
+
+        a.setVel(body,1,2);
+        a.newPos(1);
         a.print(1);
     }
    /* if (bcount>3) {

@@ -19,14 +19,16 @@ int main() {
         b.setAll(0,788e6,13000,0,mjup); //hier müssen noch Anfangsbedingungen rein. Ort: 0 788e6, v 13000 0 masse 1.899e27
         c.setAll(788e6,0,0,-13000,mjup); //hier müssen noch Anfangsbedingungen rein. Ort: 788e6 0, v 0 -13000 masse 1.899e27
         a.print(0),b.print(0),c.print(0);
-    for(int i=1;i<10000;i++) {
+    for(int i=1;i<10001;i++) {
         for(int k=0;k<bcount;k++) {
             (*body[k]).setVel(body, i, bcount);
             (*body[k]).newPos(i);
         }
     }
     }
-
+a.print(10000);
+    b.print(10000);
+    c.print(10000);
    /* if (bcount>3) {
         Gravk body[bcount];
         int i;

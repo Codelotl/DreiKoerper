@@ -38,9 +38,8 @@ int main() {
             (*body[k]).setVel(body, j, bcount);
             (*body[k]).newPos(j);
         }
-//        if(j%100==0){
+//        if(i%100==0){
 //            dat << a.getPosx(j) << " " << a.getPosy(j) << " " << b.getPosx(j) << " " << b.getPosy(j) << " " << c.getPosx(j) << " " << c.getPosy(j)  << endl;
-          //  dat << a.getPosx(i) << a.getPosy(i) << b.getPosx(i) << b.getPosy(i) << c.getPosx(i) << c.getPosy(i)  << endl;
 //        }
     }
     dat.close();

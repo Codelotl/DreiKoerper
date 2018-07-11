@@ -3,9 +3,8 @@
 #include "Gravk.h"
 #include <iostream>
 #include <vector>
-#include <fstream> //für Datenspeicherung in Datei
-#include <d2d1_1helper.h>
-
+#include <string>
+#include <fstream>
 using std::cout;
 using std::endl;
 double mjup=1.899e27;
@@ -21,19 +20,23 @@ int main() {
         b.setAll(0,788e6,13000,0,mjup); //hier müssen noch Anfangsbedingungen rein. Ort: 0 788e6, v 13000 0 masse 1.899e27
         c.setAll(788e6,0,0,-13000,mjup); //hier müssen noch Anfangsbedingungen rein. Ort: 788e6 0, v 0 -13000 masse 1.899e27
         a.print(0),b.print(0),c.print(0);
-     // std::ofstream datafile;
-     // datafile.open("data.txt");
-    for(int i=1;i<10000;i++) {
-        for (int k = 0; k < bcount; k++) {
+        std::ofstream dat;
+        dat.open("dat.txt");
+    for(int i=1;i<10001;i++) {
+        for(int k=0;k<bcount;k++) {
             (*body[k]).setVel(body, i, bcount);
             (*body[k]).newPos(i);
-   //       if (i % 100 == 0) {
-   //           datafile << "a.print(i) b.print(i) c.print(i) \n";
-            }
+        }
+        if(i%100==0){
+            dat << a.getPosx(i) << " " << a.getPosy(i) << " " << b.getPosx(i) << " " << b.getPosy(i) << " " << c.getPosx(i) << " " << c.getPosy(i)  << endl;
+          //  dat << a.getPosx(i) << a.getPosy(i) << b.getPosx(i) << b.getPosy(i) << c.getPosx(i) << c.getPosy(i)  << endl;
         }
     }
-  //datafile.close();
+    dat.close();
     }
+    a.print(10000);
+    b.print(10000);
+    c.print(10000);
    /* if (bcount>3) {
         Gravk body[bcount];
         int i;

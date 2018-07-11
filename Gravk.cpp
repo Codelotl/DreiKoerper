@@ -65,8 +65,8 @@ using std::endl;
         return force;
     }
     void Gravk::setVel(Gravk **body, unsigned t, int bcount) {
-        vx.push_back(vx.at(t-1)+(this->Forcex(body,t,bcount)*dt)/(mass));
-        vy.push_back(vy.at(t-1)+(this->Forcey(body,t,bcount)*dt)/(mass));
+        vx.push_back(vx.at(t-1)+((-1)*this->Forcex(body,t,bcount)*dt)/(mass));
+        vy.push_back(vy.at(t-1)+((-1)*this->Forcey(body,t,bcount)*dt)/(mass));
     } //bcount anzahl der körper -1
     void Gravk::newPos(unsigned t) {
         x.push_back(x.at(t-1)+vx.at(t)*dt); //ACHTUNG hier wird immer von Zeitschritten von einer sek ausgegangen

@@ -8,17 +8,18 @@
 using std::cout;
 using std::endl;
 double mjup=1.899e27;
+double msun=1.989e30;
 int main() {
     Gravk a,b,c;
-    printf("Dies ist eine Bewegungssimulation für mehrere Köerper, die durch ihre Schwerkraft beeinflusst werden. \n Geben Sie bitte die Anzahl der Objekte ein. Vorgefertigte Systeme: \n 0: 3 Jupitermassen \n 1: no function \n 2: no function \n");
+    printf("Dies ist eine Bewegungssimulation für mehrere Köerper, die durch ihre Schwerkraft beeinflusst werden. \n Geben Sie bitte die Anzahl der Objekte ein. Vorgefertigte Systeme: \n 0: 3 Sonnenmassen \n 1: no function \n 2: no function \n");
     int bcount=0;
     scanf("%i",&bcount); //Anzahl der Körper wird eingelesen
     if (bcount==0) {
         bcount = 3;
        Gravk* body[bcount]={&a,&b,&c}; //Hier sollen die Körpernamen durch ein Array durchzählbar werden.
-        (*body[0]).setAll(0,0,0,13000,mjup); //hier müssen noch Anfangsbedingungen rein. Ort: 0 0, v 0 13000 masse 1.899e27
-        b.setAll(0,788e6,13000,0,mjup); //hier müssen noch Anfangsbedingungen rein. Ort: 0 788e6, v 13000 0 masse 1.899e27
-        c.setAll(788e6,0,0,-13000,mjup); //hier müssen noch Anfangsbedingungen rein. Ort: 788e6 0, v 0 -13000 masse 1.899e27
+        (*body[0]).setAll(-788e6,788e6,0,-13000,msun); //hier müssen noch Anfangsbedingungen rein. Ort: 0 0, v 0 13000 masse 1.899e27
+        b.setAll(0,788e6,0,13000,msun); //hier müssen noch Anfangsbedingungen rein. Ort: 0 788e6, v 13000 0 masse 1.899e27
+        c.setAll(788e6,0,13000,0,msun); //hier müssen noch Anfangsbedingungen rein. Ort: 788e6 0, v 0 -13000 masse 1.899e27
         a.print(0),b.print(0),c.print(0);
         std::ofstream dat;
         dat.open("dat.txt");
@@ -34,9 +35,6 @@ int main() {
     }
     dat.close();
     }
-    a.print(10000);
-    b.print(10000);
-    c.print(10000);
    /* if (bcount>3) {
         Gravk body[bcount];
         int i;

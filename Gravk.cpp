@@ -73,3 +73,24 @@ using std::endl;
         y.push_back(y.at(t-1)+vy.at(t)*dt);}
     double Gravk::test(int t) {return mass;}
     void Gravk::print(int t) { cout << "Koerper mit m = " << this->getMass() << ", v= (" << this->getVelx(t) << " , " << this->getVely(t) <<")"<< "; r= (" << this->getPosx(t) <<" , " << getPosy(t) <<")"<< endl;}
+
+    void Gravk::setVelbegin(Gravk **body, unsigned t, int bcount) {
+        double help1;
+        help1=vx.at(t-1)+((-1)*this->Forcex(body,t,bcount)*dt)/(mass);
+        vx.clear();
+        vx.push_back(help1);
+        double help2;
+        help2=vy.at(t-1)+((-1)*this->Forcey(body,t,bcount)*dt)/(mass);
+        vy.clear();
+        vy.push_back(help2);
+    }
+    void Gravk::newPosbegin(unsigned t) {
+        double help3;
+        help3=x.at(t-2)+vx.at(0)*dt;
+        x.clear();
+      //  x.push_back(help3);
+        double help4;
+     //   help4=y.at(t-1)+vy.at(0)*dt;
+       // y.clear();
+       // y.push_back(help4);
+    }

@@ -34,6 +34,8 @@ public:
     void newPos(unsigned t);
     double test(int t);
     void print(int t);
+    void setVelbegin(Gravk** body, unsigned t, int bcount);
+    void newPosbegin(unsigned t);
 };
 
 

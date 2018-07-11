@@ -23,15 +23,25 @@ int main() {
         a.print(0),b.print(0),c.print(0);
         std::ofstream dat;
         dat.open("dat.txt");
-    for(int i=1;i<10001;i++) {
+        int j=0;
+    for(int i=1;i<102;i++) {
+        if(j==100) {
+            dat << a.getPosx(j) << " " << a.getPosy(j) << " " << b.getPosx(j) << " " << b.getPosy(j) << " " << c.getPosx(j) << " " << c.getPosy(j)  << endl;
+            for (int k = 0; k < bcount; k++) {
+                (*body[k]).setVelbegin(body, j, bcount);
+                (*body[k]).newPosbegin(j);
+            }
+            j=0;
+        }
+        j=j+1;
         for(int k=0;k<bcount;k++) {
-            (*body[k]).setVel(body, i, bcount);
-            (*body[k]).newPos(i);
+            (*body[k]).setVel(body, j, bcount);
+            (*body[k]).newPos(j);
         }
-        if(i%100==0){
-            dat << a.getPosx(i) << " " << a.getPosy(i) << " " << b.getPosx(i) << " " << b.getPosy(i) << " " << c.getPosx(i) << " " << c.getPosy(i)  << endl;
+//        if(j%100==0){
+//            dat << a.getPosx(j) << " " << a.getPosy(j) << " " << b.getPosx(j) << " " << b.getPosy(j) << " " << c.getPosx(j) << " " << c.getPosy(j)  << endl;
           //  dat << a.getPosx(i) << a.getPosy(i) << b.getPosx(i) << b.getPosy(i) << c.getPosx(i) << c.getPosy(i)  << endl;
-        }
+//        }
     }
     dat.close();
     }

@@ -71,5 +71,16 @@ using std::endl;
     void Gravk::newPos(unsigned t) {
         x.push_back(x.at(t-1)+vx.at(t)*dt); //ACHTUNG hier wird immer von Zeitschritten von einer sek ausgegangen
         y.push_back(y.at(t-1)+vy.at(t)*dt);}
-    double Gravk::test(int t) {return mass;}
+    //double Gravk::test(int t) {return mass;}
+void Gravk::verPos(Gravk **body, unsigned t, int bcount){
+        x.push_back(2*(x.at(t))-x.at(t-1)+Forcex(body,t,bcount)/(mass)*pow(dt,2));
+        y.push_back(2*(y.at(t))-y.at(t-1)+Forcey(body,t,bcount)/(mass)*pow(dt,2));
+    }
     void Gravk::print(int t) { cout << "Koerper mit m = " << this->getMass() << ", v= (" << this->getVelx(t) << " , " << this->getVely(t) <<")"<< "; r= (" << this->getPosx(t) <<" , " << getPosy(t) <<")"<< endl;}
+
+void Gravk::firstPos(Gravk **body, int bcount) {
+    x.push_back(x.at(0)+vx.at(0)*dt+0.5*Forcex(body,1,bcount)/(mass)*pow(dt,2));
+    y.push_back(y.at(0)+vy.at(0)*dt+0.5*Forcex(body,1,bcount)/(mass)*pow(dt,2));
+}
+
+

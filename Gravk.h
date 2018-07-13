@@ -12,7 +12,7 @@
 using std::cout;
 using std::endl;
 const double G= 6.674e-11;
-const double dt=1.0;
+const double dt=2;
 
 class Gravk { /*Klasse um Gravitationskörper zu initialisieren*/
 public:
@@ -32,7 +32,8 @@ public:
     double Forcey(Gravk** body, unsigned t, int bcount);
     void setVel(Gravk** body, unsigned t, int bcount);
     void newPos(unsigned t);
-    double test(int t);
+    void firstPos(Gravk** body, int bcount);
+    void verPos(Gravk** body, unsigned t, int bcount);
     void print(int t);
 };
 

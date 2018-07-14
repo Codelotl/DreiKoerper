@@ -7,44 +7,65 @@
 #include <fstream>
 using std::cout;
 using std::endl;
-double mjup=1.899e27;
-double msun=1.989e30;
+double mjup=1.899e27,merde=5.972e24,msun=1.989e30,mmond=7.349e22;
+double rjup=778.36e6, rerde=149598022.96e3,rmond=383397.7916e3;
+double vjup=13070, verde=29.78e3,vmond=	1.023e3;
 int main() {
-    Gravk a,b,c;
-    printf("Dies ist eine Bewegungssimulation für mehrere Köerper, die durch ihre Schwerkraft beeinflusst werden. \n Geben Sie bitte die Anzahl der Objekte ein. Vorgefertigte Systeme: \n 0: 3 Sonnenmassen \n 1: no function \n 2: no function \n");
-    int bcount=0;
-    scanf("%i",&bcount); //Anzahl der Körper wird eingelesen
-    if (bcount==0) {
+    Gravk a, b, c;
+    printf("Dies ist eine Bewegungssimulation für mehrere Köerper, die durch ihre Schwerkraft beeinflusst werden. \n Geben Sie bitte die Anzahl der Objekte ein. Vorgefertigte Systeme: \n 0: 3 Sonnenmassen \n 1: Sonne-Erde-Mond \n 2: no function \n");
+    int bcount = 0;
+    scanf("%i", &bcount); //Anzahl der Körper wird eingelesen
+    if (bcount == 0) {
         bcount = 3;
-       Gravk* body[bcount]={&a,&b,&c}; //Hier sollen die Körpernamen durch ein Array durchzählbar werden.
-        (*body[0]).setAll(-788e6,788e6,0,-13000,msun); //hier müssen noch Anfangsbedingungen rein. Ort: 0 0, v 0 13000 masse 1.899e27
-        b.setAll(0,788e6,0,13000,msun); //hier müssen noch Anfangsbedingungen rein. Ort: 0 788e6, v 13000 0 masse 1.899e27
-        c.setAll(788e6,0,13000,0,msun); //hier müssen noch Anfangsbedingungen rein. Ort: 788e6 0, v 0 -13000 masse 1.899e27
-        a.print(0),b.print(0),c.print(0);
+        Gravk *body[bcount] = {&a, &b, &c}; //Hier sollen die Körpernamen durch ein Array durchzählbar werden.
+        (*body[0]).setAll(-rjup, rjup, 0, -vjup, msun); //hier müssen noch Anfangsbedingungen rein. Ort: 0 0, v 0 13000 masse 1.899e27
+        b.setAll(0, rjup, 0, vjup, msun); //hier müssen noch Anfangsbedingungen rein. Ort: 0 788e6, v 13000 0 masse 1.899e27
+        c.setAll(rjup, 0, vjup, 0, msun); //hier müssen noch Anfangsbedingungen rein. Ort: 788e6 0, v 0 -13000 masse 1.899e27
+        a.print(0), b.print(0), c.print(0);
         std::ofstream dat;
-        dat.open("dat.txt");
-        int j=0;
-    for(int i=1;i<102;i++) {
-        if(j==100) {
-            dat << a.getPosx(j) << " " << a.getPosy(j) << " " << b.getPosx(j) << " " << b.getPosy(j) << " " << c.getPosx(j) << " " << c.getPosy(j)  << endl;
-            for (int k = 0; k < bcount; k++) {
-                (*body[k]).setVelbegin(body, j, bcount);
-                (*body[k]).newPosbegin(j);
+        dat.open("shootout.txt");
+        for (unsigned i = 1; i < 10000000; i++) {
+            for (unsigned k = 0; k < bcount; k++) {
+                (*body[k]).setVel(body, bcount);
+                (*body[k]).newPos(1);
             }
-            j=0;
+            if (i % 100 == 0) {
+                dat << a.getPosx(1) << " " << a.getPosy(1) << " " << b.getPosx(1) << " " << b.getPosy(1) << " "
+                    << c.getPosx(1) << " " << c.getPosy(1) << endl;
+                //  dat << a.getPosx(i) << a.getPosy(i) << b.getPosx(i) << b.getPosy(i) << c.getPosx(i) << c.getPosy(i)  << endl;
+            }
+
+
         }
-        j=j+1;
-        for(int k=0;k<bcount;k++) {
-            (*body[k]).setVel(body, j, bcount);
-            (*body[k]).newPos(j);
+        dat.close();
         }
-//        if(i%100==0){
-//            dat << a.getPosx(j) << " " << a.getPosy(j) << " " << b.getPosx(j) << " " << b.getPosy(j) << " " << c.getPosx(j) << " " << c.getPosy(j)  << endl;
-//        }
+    if (bcount == 1) {
+        bcount = 3;
+        Gravk *body[bcount] = {&a, &b, &c}; //Hier sollen die Körpernamen durch ein Array durchzählbar werden.
+        (*body[0]).setAll(0,0, 0,0, msun);
+        b.setAll(rerde,0, 0,-verde,merde);
+        c.setAll(rerde-rmond,0,0,vmond, mmond);
+        a.print(0);
+        a.firstPos(body,bcount);
+        b.firstPos(body,bcount);
+        c.firstPos(body,bcount);
+        std::ofstream data;
+        data.open("sem.txt");
+
+        for (unsigned i = 1; i < 10001; i++) {
+            for (unsigned k = 0; k < bcount; k++) {
+                (*body[k]).verPos(body, bcount);
+            }
+            if (i % 100 == 0) {
+                data << a.getPosx(2) << " " << a.getPosy(2) << " " << b.getPosx(2) << " " << b.getPosy(2) << " " << c.getPosx(2) << " " << c.getPosy(2) << endl;
+                //  dat << a.getPosx(i) << a.getPosy(i) << b.getPosx(i) << b.getPosy(i) << c.getPosx(i) << c.getPosy(i)  << endl;
+            }
+
+
+        }data.close();
     }
-    dat.close();
-    }
-   /* if (bcount>3) {
+
+/*if (bcount==2) {
         Gravk body[bcount];
         int i;
         for (i; i<bcount; i++) {
@@ -54,7 +75,6 @@ int main() {
 
         }
     }*/
-
     //std::vector<double> v (100), u={3.844e+1,3.844e+1}, t={10e+10,10e+10}; //v (100) gibt vektor mit 100 null einträgen
     //v.push_back(2.0);
     //v.push_back(3.0);

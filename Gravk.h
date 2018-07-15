@@ -12,7 +12,7 @@
 using std::cout;
 using std::endl;
 const double G= 6.674e-11;
-const double dt=2;
+const double dt=5;
 
 class Gravk { /*Klasse um Gravitationskörper zu initialisieren*/
 public:

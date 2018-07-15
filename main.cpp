@@ -17,11 +17,11 @@ int main() {
     scanf("%i", &bcount); //Anzahl der Körper wird eingelesen
     if (bcount == 0) {
         bcount = 3;
-        Gravk *body[bcount] = {&a, &b, &c}; //Hier sollen die Körpernamen durch ein Array durchzählbar werden.
-        (*body[0]).setAll(-rjup, rjup, 0, -vjup, msun); //hier müssen noch Anfangsbedingungen rein. Ort: 0 0, v 0 13000 masse 1.899e27
-        b.setAll(0, rjup, 0, vjup, msun); //hier müssen noch Anfangsbedingungen rein. Ort: 0 788e6, v 13000 0 masse 1.899e27
-        c.setAll(rjup, 0, vjup, 0, msun); //hier müssen noch Anfangsbedingungen rein. Ort: 788e6 0, v 0 -13000 masse 1.899e27
-        a.print(0), b.print(0), c.print(0);
+        Gravk *body[bcount] = {&a, &b, &c}; //Hier sind die Körpernamen durch ein Array durchzählbar
+        (*body[0]).setAll(-rjup, rjup, 0, -vjup, msun); //hier befinden sich die startparameter wie in aufgabe c)
+        b.setAll(0, rjup, 0, vjup, msun);
+        c.setAll(rjup, 0, vjup, 0, msun);
+        a.print(0), b.print(0), c.print(0); //unsere printfunktion um die startwerte in die Konsole auszugeben
         std::ofstream dat;
         dat.open("shootout.txt");
         for (unsigned i = 1; i < 10000000; i++) {
@@ -41,18 +41,18 @@ int main() {
         }
     if (bcount == 1) {
         bcount = 3;
-        Gravk *body[bcount] = {&a, &b, &c}; //Hier sollen die Körpernamen durch ein Array durchzählbar werden.
-        (*body[0]).setAll(0,0, 0,0, msun);
+        Gravk *body[bcount] = {&a, &b, &c}; //Hier wieder das array aus Körpern
+        (*body[0]).setAll(0,0, 0,0, msun); //Startbedingungen hoffentlich wie im sonne erde mond system
         b.setAll(rerde,0, 0,-verde,merde);
-        c.setAll(rerde-rmond,0,0,vmond, mmond);
-        a.print(0);
-        a.firstPos(body,bcount);
+        c.setAll(rerde-rmond,0,0,vmond, mmond); //mond startet zwischen erde und sonne
+        a.print(0),b.print(0),c.print(0);
+        a.firstPos(body,bcount); //hier werden die ersten positionen nach dem Verlet-Algorithmus berechnet
         b.firstPos(body,bcount);
         c.firstPos(body,bcount);
         std::ofstream data;
         data.open("sem.txt");
 
-        for (unsigned i = 1; i < 10001; i++) {
+        for (unsigned i = 1; i < 10000000; i++) { //in der Schleife wird dann mit der Pos.bestimmung nach Verlet gearbeitet
             for (unsigned k = 0; k < bcount; k++) {
                 (*body[k]).verPos(body, bcount);
             }

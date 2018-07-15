@@ -10,16 +10,19 @@
 using std::cout;
 using std::endl;
 
+    //Konstruktor
     Gravk::Gravk(){
         posx;
         posy;
         velx;
         vely;
         mass = 1.0;
-    } /*Konstruktor, für die oben genannten Werte wird im Gravk.cpp definiert*/
+    }
     Gravk::~Gravk(){
 
     };
+
+    //Set-Funktion, weißt allen Körpern anfangswerte zu
     void Gravk::setAll(double a, double b, double c, double d, double h){ //Set Funktion um einem Körper Werte zuzuweisen
         posx[0]=a, posx[1]=a;
         posy[0]=b, posy[1]=b;
@@ -27,6 +30,8 @@ using std::endl;
         vely[0]=d, vely[1]=d;
         mass=h;
     }
+
+    //get-Funktionen für alle Parameter eines Körpers
     double Gravk::getMass(){
         return mass;
     }
@@ -42,9 +47,13 @@ using std::endl;
     double Gravk::getVely(unsigned t){ //Funktion um Y-Geschw. zur Zeit t zu kriegen
         return vely[t];
     }
+
+    //distance Funktion berechnet Abstand als Skalar
     double Gravk::distance(Gravk a){ //Berechnet Abstand von zwei Körpern zur Zeit t
         return sqrt(pow((getPosx(1) - a.getPosx(1)),2)+pow((getPosy(1)-a.getPosy(1)),2));
     }
+
+    //Berechnet Kraft zwischen zwei körpern mithilfe des Abstands in x und in y richtung
     double Gravk::Forcex(Gravk **body, int bcount) {
         double force=0;
         for(int i=0;i<bcount;i++){
@@ -64,14 +73,18 @@ using std::endl;
         }
         return force;
     }
+
+    //Berechnungsmethoden der Bewegungen nach dem Euler verfahren
     void Gravk::setVel(Gravk **body, int bcount) {
         velx[1]=velx[1]+((-1)*(this->Forcex(body,bcount)*dt)/(mass));
         vely[1]=vely[1]+((-1)*(this->Forcey(body,bcount)*dt)/(mass));
     } //bcount anzahl der körper -1
     void Gravk::newPos(unsigned t) {
-        posx[1]=(posx[1]+velx[1]*dt); //ACHTUNG hier wird immer von Zeitschritten von einer sek ausgegangen
+        posx[1]=(posx[1]+velx[1]*dt);
         posy[1]=(posy[1]+vely[1]*dt);}
     //double Gravk::test(int t) {return mass;}
+
+    //Berechnung der neuen Position der Körper mit Verlet-Algorithmus
 void Gravk::verPos(Gravk **body, int bcount){
         double help1=posx[2]; //speichter denn n-ten iterationsschritt
         double help2=posy[2];
@@ -80,11 +93,17 @@ void Gravk::verPos(Gravk **body, int bcount){
         posx[1]=help1; //setzt den alten Iterationsschritt n-1 auf das neue n-1, also n.
         posy[1]=help2;
     }
-    void Gravk::print(int t) { cout << "Koerper mit m = " << this->getMass() << ", v= (" << this->getVelx(t) << " , " << this->getVely(t) <<")"<< "; r= (" << this->getPosx(t) <<" , " << getPosy(t) <<")"<< endl;}
 
+    //Berechnung der ersten Position nach Verlet
 void Gravk::firstPos(Gravk **body, int bcount) {
     posx[2]=(posx[1]+velx[1]*dt+0.5*Forcex(body,bcount)/(mass)*pow(dt,2));
     posy[2]=(posy[1]+vely[1]*dt+0.5*Forcex(body,bcount)/(mass)*pow(dt,2));
 }
+
+    //Print Funktion
+    void Gravk::print(int t) { cout << "Koerper mit m = " << this->getMass() << ", v= (" << this->getVelx(t) << " , " << this->getVely(t) <<")"<< "; r= (" << this->getPosx(t) <<" , " << getPosy(t) <<")"<< endl;}
+
+
+
 
 

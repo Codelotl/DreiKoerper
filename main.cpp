@@ -1,7 +1,7 @@
 #include <cstdio>
 #include <cmath>
 #include "Gravk.h"
-#include <iostream>
+#include <iostream> // \201 ü, \204 ä, \224 ö
 #include <vector>
 #include <string>
 #include <fstream>
@@ -12,7 +12,7 @@ double rjup=778.36e6, rerde=149598022.96e3,rmond=383397.7916e3;
 double vjup=13070, verde=29.78e3,vmond=	1.023e3;
 int main() {
     Gravk a, b, c;
-    printf("Dies ist eine Bewegungssimulation für mehrere Köerper, die durch ihre Schwerkraft beeinflusst werden. \n Geben Sie bitte die Anzahl der Objekte ein. Vorgefertigte Systeme: \n 0: 3 Sonnenmassen \n 1: Sonne-Erde-Mond \n 2: no function \n");
+    printf("Dies ist eine Bewegungssimulation f\201r mehrere K\224rper, die durch ihre Schwerkraft beeinflusst werden. \n Geben Sie bitte die Anzahl der Objekte ein. Vorgefertigte Systeme: \n 0: 3 Sonnenmassen \n 1: Sonne-Erde-Mond \n 2: Erde und Mond \n");
     int bcount = 0;
     scanf("%i", &bcount); //Anzahl der Körper wird eingelesen
     if (bcount == 0) {
@@ -22,17 +22,20 @@ int main() {
         b.setAll(0, rjup, 0, vjup, msun);
         c.setAll(rjup, 0, vjup, 0, msun);
         a.print(0), b.print(0), c.print(0); //unsere printfunktion um die startwerte in die Konsole auszugeben
+        a.firstPos(body,bcount); //hier werden die ersten positionen nach dem Verlet-Algorithmus berechnet
+        b.firstPos(body,bcount);
+        c.firstPos(body,bcount);
         std::ofstream dat;
         dat.open("shootout.txt");
-        for (unsigned i = 1; i < 10000000; i++) {
+        for (unsigned i = 1; i < 1000000; i++) {
             for (unsigned k = 0; k < bcount; k++) {
-                (*body[k]).setVel(body, bcount);
-                (*body[k]).newPos(1);
+                (*body[k]).verPos(body, bcount);
+                //(*body[k]).setVel(body, bcount);
+                //(*body[k]).newPos(1);
             }
-            if (i % 100 == 0) {
+            if (i % 1000 == 0) {
                 dat << a.getPosx(1) << " " << a.getPosy(1) << " " << b.getPosx(1) << " " << b.getPosy(1) << " "
                     << c.getPosx(1) << " " << c.getPosy(1) << endl;
-                //  dat << a.getPosx(i) << a.getPosy(i) << b.getPosx(i) << b.getPosy(i) << c.getPosx(i) << c.getPosy(i)  << endl;
             }
 
 
@@ -44,7 +47,7 @@ int main() {
         Gravk *body[bcount] = {&a, &b, &c}; //Hier wieder das array aus Körpern
         (*body[0]).setAll(0,0, 0,0, msun); //Startbedingungen hoffentlich wie im sonne erde mond system
         b.setAll(rerde,0, 0,-verde,merde);
-        c.setAll(rerde-rmond,0,0,vmond, mmond); //mond startet zwischen erde und sonne
+        c.setAll(rerde-rmond,0,0,-verde+vmond, mmond); //mond startet zwischen erde und sonne
         a.print(0),b.print(0),c.print(0);
         a.firstPos(body,bcount); //hier werden die ersten positionen nach dem Verlet-Algorithmus berechnet
         b.firstPos(body,bcount);
@@ -56,13 +59,35 @@ int main() {
             for (unsigned k = 0; k < bcount; k++) {
                 (*body[k]).verPos(body, bcount);
             }
-            if (i % 100 == 0) {
+            if (i % 10000 == 0) {
                 data << a.getPosx(2) << " " << a.getPosy(2) << " " << b.getPosx(2) << " " << b.getPosy(2) << " " << c.getPosx(2) << " " << c.getPosy(2) << endl;
-                //  dat << a.getPosx(i) << a.getPosy(i) << b.getPosx(i) << b.getPosy(i) << c.getPosx(i) << c.getPosy(i)  << endl;
             }
 
 
         }data.close();
+    }
+    if (bcount == 2) {
+        bcount = 2;
+        Gravk *body[bcount] = {&a, &b}; //Hier sind die Körpernamen durch ein Array durchzählbar
+        a.setAll(0,0, 0,0, merde); //hier befinden sich die startparameter wie in aufgabe c)
+        b.setAll(rmond,0, 0, vmond, mmond);
+        a.print(0), b.print(0); //unsere printfunktion um die startwerte in die Konsole auszugeben
+        a.firstPos(body,bcount); //hier werden die ersten positionen nach dem Verlet-Algorithmus berechnet
+        b.firstPos(body,bcount);
+        std::ofstream dat;
+        dat.open("em.txt");
+        for (unsigned i = 1; i < 10000000; i++) {
+            for (unsigned k = 0; k < bcount; k++) {
+                (*body[k]).verPos(body, bcount);
+            }
+            if (i % 10000 == 0) {
+                dat << a.getPosx(1) << " " << a.getPosy(1) << " " << b.getPosx(1) << " " << b.getPosy(1) << endl;
+                //  dat << a.getPosx(i) << a.getPosy(i) << b.getPosx(i) << b.getPosy(i) << c.getPosx(i) << c.getPosy(i)  << endl;
+            }
+
+
+        }
+        dat.close();
     }
 
 /*if (bcount==2) {

@@ -86,18 +86,18 @@ using std::endl;
 
     //Berechnung der neuen Position der Körper mit Verlet-Algorithmus
 void Gravk::verPos(Gravk **body, int bcount){
-        double help1=posx[2]; //speichter denn n-ten iterationsschritt
+        double help1=posx[2]; //speichert denn n-ten iterationsschritt
         double help2=posy[2];
-        posx[2]=(2*(help1)-posx[1]+Forcex(body,bcount)/(mass)*pow(dt,2)); //schreibt in den n+1-ten Iterationsschritt in den n-ten
-        posy[2]=(2*(help2)-posy[1]+Forcey(body,bcount)/(mass)*pow(dt,2));
+        posx[2]=(2*(help1)-posx[1]+(-1)*Forcex(body,bcount)/(mass)*pow(dt,2)); //schreibt in den n+1-ten Iterationsschritt in den n-ten
+        posy[2]=(2*(help2)-posy[1]+(-1)*Forcey(body,bcount)/(mass)*pow(dt,2));
         posx[1]=help1; //setzt den alten Iterationsschritt n-1 auf das neue n-1, also n.
         posy[1]=help2;
     }
 
     //Berechnung der ersten Position nach Verlet
 void Gravk::firstPos(Gravk **body, int bcount) {
-    posx[2]=(posx[1]+velx[1]*dt+0.5*Forcex(body,bcount)/(mass)*pow(dt,2));
-    posy[2]=(posy[1]+vely[1]*dt+0.5*Forcex(body,bcount)/(mass)*pow(dt,2));
+    posx[2]=(posx[1]+velx[1]*dt+(-0.5)*Forcex(body,bcount)/(mass)*pow(dt,2));
+    posy[2]=(posy[1]+vely[1]*dt+(-0.5)*Forcex(body,bcount)/(mass)*pow(dt,2));
 }
 
     //Print Funktion

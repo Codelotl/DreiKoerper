@@ -145,8 +145,6 @@ int main() {
         Gravk a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z;
         Gravk *body[bcount] = {&a, &b, &c, &d, &e, &f, &g, &h, &i, &j, &k, &l, &m, &n, &o, &p, &q, &r, &s, &t, &u, &v, &w, &x, &y, &z};
         printf("Bitte eine Daten.txt Datei mit erster Spalte x-Positionen, zweiter Spalte y-Positionen, dritter Spalte x-Geschwindigkeiten und vierter Spalte y-Geschwindigkeiten und f\201nfter Spalte Masse (in SI-Einheiten) in den Ordner der Dreikoerper.exe anlegen. Beliebige Zahl eingeben zum Fortfahren.\n");
-        //std::string ;
-        //scanf("%i\n",&puffer);
         int dummy;
         scanf("%i", &dummy);
         FILE *einlesen;

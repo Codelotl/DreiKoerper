@@ -11,8 +11,14 @@ double mjup=1.899e27,merde=5.972e24,msun=1.989e30,mmond=7.349e22;
 double rjup=778.36e6, rerde=149598022.96e3,rmond=383397.7916e3;
 double vjup=13070, verde=29.78e3,vmond=	1.023e3;
 int main() {
-    Gravk a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z; //einmal alle 26 möglcihen Graviationskörper frstlegen, per Schleife nur schwerer umsetzbar
+    Gravk a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z; //einmal alle 26 möglichen Graviationskörper festlegen, per Schleife nur schwerer umsetzbar
     //Startmenü
+    cout<<"//=====================================================================\\\\"<<endl
+        <<"||~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~||"<<endl
+        <<"||~~~~~~~~~~~~~~~ Simulation f\201r Gravitations Systeme ~~~~~~~~~~~~~~~~~||"<<endl
+        <<"||~~~~~~~~~ (C) Timo G\224hring & Maximilian Jaffke. Version 1.0 ~~~~~~~~~||"<<endl
+        <<"||~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~||"<<endl
+        <<"\\\\=====================================================================//"<<endl;
     printf("Dies ist eine Bewegungssimulation f\201r mehrere K\224rper, die durch ihre Schwerkraft beeinflusst werden. \nGeben Sie bitte die Anzahl der K\224rper ein (max. 26). 0 f\201r vorgefertigte Systeme: \n");
     int bcount = 0;
     scanf("%i", &bcount); //Anzahl der Körper wird eingelesen
@@ -355,7 +361,14 @@ int main() {
         }
         dat.close();
         // Falls mehr als 26 Körper
-    } else {
+    }
+    else if (bcount ==42){
+        printf("Herzlichen Gl\201ckwunsch, du hast gerade ein Easter-Egg gefunden. Aber war es das einzige?\n");
+    }
+    else if (bcount ==1337){
+        printf("Nicht sicher ob Leet oder Molekularsimulation!?\n");
+    }
+    else {
         printf("Hilfe, bin ich eine Molekularsimulation? Programm beendet");
         return 0;
     }

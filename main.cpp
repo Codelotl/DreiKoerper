@@ -154,9 +154,10 @@ int main() {
         double xa,ya,vxa,vya,mobj;
         for (bi=0; bi<bcount; bi++) {
             std::getline(einlesen,line);
-         //   sscanf(line,"&i, &i, &i, &i, &i", &xa, &ya, &vxa, &vya, &mobj);
+        //    sscanf(line,"&i, &i, &i, &i, &i", &xa, &ya, &vxa, &vya, &mobj);
             (*body[bi]).setAll(xa, ya, vxa, vya, mobj);
         }
+        einlesen.close();
         printf("Bitte ein Verfahren ausw\204hlen, 0 f\201r Euler-Verfahren, 1 f\201r Verlet-Algorithmus: \n");
         int typ;
         scanf("%i", &typ);
@@ -188,7 +189,7 @@ int main() {
         dat.close();
         // Falls mehr als 26 Körper
     } else {
-        printf("Aua, falsche Parameter? Programm beendet");
+        printf("Hilfe, bin ich eine Molekularsimulation? Programm beendet");
         return 0;
     }
     printf("Programm beendet");

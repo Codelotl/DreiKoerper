@@ -144,22 +144,22 @@ int main() {
         //Hier n-Körpereingabe
         Gravk a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z;
         Gravk *body[bcount] = {&a, &b, &c, &d, &e, &f, &g, &h, &i, &j, &k, &l, &m, &n, &o, &p, &q, &r, &s, &t, &u, &v, &w, &x, &y, &z};
-        printf("Bitte eine Daten.txt Datei mit erster Spalte x-Positionen, zweiter Spalte y-Positionen, dritter Spalte x-Geschwindigkeiten und vierter Spalte y-Geschwindigkeiten und f\201nfter Spalte Masse (in SI-Einheiten) in den Ordner der Dreikoerper.exe anlegen. Beliebige Eingabe zum Fortfahren t\204tigen.\n");
-        std::string puffer;
-        scanf("%i",&puffer);
-        std::ifstream einlesen;
-        einlesen.open("Daten.txt");
-        std::string line;
-        int bi;
+        printf("Bitte eine Daten.txt Datei mit erster Spalte x-Positionen, zweiter Spalte y-Positionen, dritter Spalte x-Geschwindigkeiten und vierter Spalte y-Geschwindigkeiten und f\201nfter Spalte Masse (in SI-Einheiten) in den Ordner der Dreikoerper.exe anlegen. Beliebige Zahl eingeben zum Fortfahren.\n");
+        //std::string ;
+        //scanf("%i\n",&puffer);
+        int dummy;
+        scanf("%i", &dummy);
+        FILE *einlesen;
+        einlesen=fopen("Daten.txt","r");
+        int bi=0;
         double xa,ya,vxa,vya,mobj;
-        for (bi=0; bi<bcount; bi++) {
-            std::getline(einlesen,line);
-        //    sscanf(line,"&i, &i, &i, &i, &i", &xa, &ya, &vxa, &vya, &mobj);
+        while (fscanf(einlesen," %d %d %d %d %d", &xa, &ya, &vxa, &vya, &mobj) != EOF) {
             (*body[bi]).setAll(xa, ya, vxa, vya, mobj);
+            bi=bi+1;
         }
-        einlesen.close();
+        fclose(einlesen);
         printf("Bitte ein Verfahren ausw\204hlen, 0 f\201r Euler-Verfahren, 1 f\201r Verlet-Algorithmus: \n");
-        int typ;
+        int typ=0;
         scanf("%i", &typ);
         unsigned max, sch, dru;
         printf("Anzahl Iterationen, Schrittweite in Sekunden und jeder wie vielte Wert in die Ausgabedatei geschrieben werden soll mit Leerzeichen getrennt angeben:\n");
@@ -168,7 +168,7 @@ int main() {
             (*body[bi]).firstPos(body, bcount, sch); //hier werden die ersten positionen nach dem Verlet-Algorithmus berechne. Dies kann unnötig geschehen
         }
         std::ofstream dat;
-        dat.open("ErdeMond.txt");
+        dat.open("Ausgabe.txt");
         for (unsigned i = 1; i < max; i++) {
             for (unsigned k = 0; k < bcount; k++) {
                 if (typ == 0) {

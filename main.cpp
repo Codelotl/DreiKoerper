@@ -19,7 +19,7 @@ int main() {
 
     //Vorgefertigte Systeme
     if (bcount == 0) {
-        printf("Vorgefertigte Systeme: \n 0: 3 Sonnenmassen \n 1: Sonne-Erde-Mond \n 2: Erde und Mond \n");
+        printf("Vorgefertigte Systeme: \n 0: 3 Sonnenmassen \n 1: Sonne-Erde-Mond \n 2: Erde und Mond \n 3: 3 chaotische K\224rper \n 4: Vierk\224rpersystem\n");
         int fall = 0;
         scanf("%i", &fall); //Einlesen von Fall
 
@@ -140,6 +140,89 @@ int main() {
             dat.close();
         }
 
+        //3 chaotische Körper
+        if (fall == 3) {
+            bcount = 3;
+            Gravk *body[bcount] = {&a, &b, &c}; //Hier sind die Körpernamen durch ein Array durchzählbar
+            (*body[0]).setAll(0,0,0,0,0);
+            b.setAll(0,0,0,0,0);
+            c.setAll(0,0,0,0,0);
+            a.print(), b.print(), c.print(); //unsere printfunktion um die startwerte in die Konsole auszugeben
+            printf("Bitte ein Verfahren ausw\204hlen, 0 f\201r Euler-Verfahren, 1 f\201r Verlet-Algorithmus:\n");
+            int typ;
+            scanf("%i", &typ);
+            unsigned m, s, d; //maximale Iteration, Schrittweite, Druckhäufigkeit
+            printf("Anzahl Iterationen, Schrittweite in Sekunden und jeder wie vielte Wert in die Ausgabedatei geschrieben werden soll mit Leerzeichen getrennt angeben:\n");
+            scanf("%i %i %i", &m, &s, &d);
+            a.firstPos(body, bcount, s); //hier werden die ersten positionen nach dem Verlet-Algorithmus berechnet
+            b.firstPos(body, bcount, s); //Dies kann unnötig geschehen
+            c.firstPos(body, bcount, s);
+            std::ofstream dat;
+            dat.open("3Chaos.txt");
+            for (unsigned i = 1; i < m; i++) {
+                for (unsigned k = 0; k < bcount; k++) {
+                    if (typ == 0) {
+                        (*body[k]).setVel(body, bcount, s);
+                        (*body[k]).newPos(s);
+                    } else if (typ == 1) {
+                        (*body[k]).verPos(body, bcount, s);
+                    } else {
+                        printf("Aua, falsche Parameter? Programm beendet");
+                        return 0;
+                    }
+                }
+                if (i % d == 0) {
+                    dat << a.getPosx(1) << " " << a.getPosy(1) << " " << b.getPosx(1) << " " << b.getPosy(1) << " "
+                        << c.getPosx(1) << " " << c.getPosy(1) << endl;
+                }
+
+
+            }
+            dat.close();
+        }
+
+        //Vierkörpersystem
+        if (fall == 4) {
+            bcount = 4;
+            Gravk *body[bcount] = {&a, &b, &c}; //Hier sind die Körpernamen durch ein Array durchzählbar
+            (*body[0]).setAll(0,0,0,0,0);
+            b.setAll(0,0,0,0,0);
+            c.setAll(0,0,0,0,0);
+            d.setAll(0,0,0,0,0);
+            a.print(), b.print(), c.print(), d.print(); //unsere printfunktion um die startwerte in die Konsole auszugeben
+            printf("Bitte ein Verfahren ausw\204hlen, 0 f\201r Euler-Verfahren, 1 f\201r Verlet-Algorithmus:\n");
+            int typ;
+            scanf("%i", &typ);
+            unsigned m, s, d; //maximale Iteration, Schrittweite, Druckhäufigkeit
+            printf("Anzahl Iterationen, Schrittweite in Sekunden und jeder wie vielte Wert in die Ausgabedatei geschrieben werden soll mit Leerzeichen getrennt angeben:\n");
+            scanf("%i %i %i", &m, &s, &d);
+            a.firstPos(body, bcount, s); //hier werden die ersten positionen nach dem Verlet-Algorithmus berechnet
+            b.firstPos(body, bcount, s); //Dies kann unnötig geschehen
+            c.firstPos(body, bcount, s);
+            std::ofstream dat;
+            dat.open("4Körper.txt");
+            for (unsigned i = 1; i < m; i++) {
+                for (unsigned k = 0; k < bcount; k++) {
+                    if (typ == 0) {
+                        (*body[k]).setVel(body, bcount, s);
+                        (*body[k]).newPos(s);
+                    } else if (typ == 1) {
+                        (*body[k]).verPos(body, bcount, s);
+                    } else {
+                        printf("Aua, falsche Parameter? Programm beendet");
+                        return 0;
+                    }
+                }
+                if (i % d == 0) {
+                    dat << a.getPosx(1) << " " << a.getPosy(1) << " " << b.getPosx(1) << " " << b.getPosy(1) << " "
+                        << c.getPosx(1) << " " << c.getPosy(1) << endl;
+                }
+
+
+            }
+            dat.close();
+        }
+
     } else if (bcount < 27) {
         //Hier n-Körpereingabe
         Gravk *body[bcount] = {&a, &b, &c, &d, &e, &f, &g, &h, &i, &j, &k, &l, &m, &n, &o, &p, &q, &r, &s, &t, &u, &v, &w, &x, &y, &z};
@@ -189,6 +272,6 @@ int main() {
         printf("Hilfe, bin ich eine Molekularsimulation? Programm beendet");
         return 0;
     }
-    printf("Programm beendet");
+    printf("Berechnung und Programm beendet");
     return 1;
 }

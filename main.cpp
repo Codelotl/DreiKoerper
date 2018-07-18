@@ -40,9 +40,10 @@ int main() {
             printf("Bitte ein Verfahren ausw\204hlen, 0 f\201r Euler-Verfahren, 1 f\201r Verlet-Algorithmus:\n");
             int typ;
             scanf("%i", &typ);
-            unsigned m, s, d; //maximale Iteration, Schrittweite, Druckhäufigkeit
+            unsigned m, d; //maximale Iteration, Schrittweite, Druckhäufigkeit
+            double s;
             printf("Anzahl Iterationen, Schrittweite in Sekunden und jeder wie vielte Wert in die Ausgabedatei geschrieben werden soll mit Leerzeichen getrennt angeben:\n");
-            scanf("%i %i %i", &m, &s, &d);
+            scanf("%i %lf %i", &m, &s, &d);
             a.firstPos(body, bcount, s); //hier werden die ersten positionen nach dem Verlet-Algorithmus berechnet
             b.firstPos(body, bcount, s); //Dies kann unnötig geschehen
             c.firstPos(body, bcount, s);
@@ -81,9 +82,10 @@ int main() {
             printf("Bitte ein Verfahren ausw\204hlen, 0 f\201r Euler-Verfahren, 1 f\201r Verlet-Algorithmus: \n");
             int typ;
             scanf("%i", &typ);
-            unsigned m, s, d;
+            unsigned m, d; //maximale Iteration, Schrittweite, Druckhäufigkeit
+            double s;
             printf("Anzahl Iterationen, Schrittweite in Sekunden und jeder wie vielte Wert in die Ausgabedatei geschrieben werden soll mit Leerzeichen getrennt angeben:\n");
-            scanf("%i %i %i", &m, &s, &d);
+            scanf("%i %lf %i", &m, &s, &d);
             a.firstPos(body, bcount, s); //hier werden die ersten positionen nach dem Verlet-Algorithmus berechnet
             b.firstPos(body, bcount, s); //Dies kann unnötig geschehen
             c.firstPos(body, bcount, s);
@@ -119,9 +121,10 @@ int main() {
             printf("Bitte ein Verfahren ausw\204hlen, 0 f\201r Euler-Verfahren, 1 f\201r Verlet-Algorithmus: \n");
             int typ;
             scanf("%i", &typ);
-            unsigned m, s, d;
+            unsigned m, d; //maximale Iteration, Schrittweite, Druckhäufigkeit
+            double s;
             printf("Anzahl Iterationen, Schrittweite in Sekunden und jeder wie vielte Wert in die Ausgabedatei geschrieben werden soll mit Leerzeichen getrennt angeben:\n");
-            scanf("%i %i %i", &m, &s, &d);
+            scanf("%i %lf %i", &m, &s, &d);
             a.firstPos(body, bcount, s); //hier werden die ersten positionen nach dem Verlet-Algorithmus berechnet
             b.firstPos(body, bcount, s); //Dies kann unnötig geschehen
             std::ofstream dat;
@@ -157,9 +160,10 @@ int main() {
             printf("Bitte ein Verfahren ausw\204hlen, 0 f\201r Euler-Verfahren, 1 f\201r Verlet-Algorithmus:\n");
             int typ;
             scanf("%i", &typ);
-            unsigned m, s, d; //maximale Iteration, Schrittweite, Druckhäufigkeit
+            unsigned m, d; //maximale Iteration, Schrittweite, Druckhäufigkeit
+            double s;
             printf("Anzahl Iterationen, Schrittweite in Sekunden und jeder wie vielte Wert in die Ausgabedatei geschrieben werden soll mit Leerzeichen getrennt angeben:\n");
-            scanf("%i %i %i", &m, &s, &d);
+            scanf("%i %lf %i", &m, &s, &d);
             a.firstPos(body, bcount, s); //hier werden die ersten positionen nach dem Verlet-Algorithmus berechnet
             b.firstPos(body, bcount, s); //Dies kann unnötig geschehen
             c.firstPos(body, bcount, s);
@@ -199,9 +203,10 @@ int main() {
             printf("Bitte ein Verfahren ausw\204hlen, 0 f\201r Euler-Verfahren, 1 f\201r Verlet-Algorithmus:\n");
             int typ;
             scanf("%i", &typ);
-            unsigned m, s, d; //maximale Iteration, Schrittweite, Druckhäufigkeit
+            unsigned m, d; //maximale Iteration, Schrittweite, Druckhäufigkeit
+            double s;
             printf("Anzahl Iterationen, Schrittweite in Sekunden und jeder wie vielte Wert in die Ausgabedatei geschrieben werden soll mit Leerzeichen getrennt angeben:\n");
-            scanf("%i %i %i", &m, &s, &d);
+            scanf("%i %lf %i", &m, &s, &d);
             a.firstPos(body, bcount, s); //hier werden die ersten positionen nach dem Verlet-Algorithmus berechnet
             b.firstPos(body, bcount, s); //Dies kann unnötig geschehen
             c.firstPos(body, bcount, s);
@@ -243,9 +248,10 @@ int main() {
             printf("Bitte ein Verfahren ausw\204hlen, 0 f\201r Euler-Verfahren, 1 f\201r Verlet-Algorithmus:\n");
             int typ;
             scanf("%i", &typ);
-            unsigned m, s, d; //maximale Iteration, Schrittweite, Druckhäufigkeit
+            unsigned m, d; //maximale Iteration, Schrittweite, Druckhäufigkeit
+            double s;
             printf("Anzahl Iterationen, Schrittweite in Sekunden und jeder wie vielte Wert in die Ausgabedatei geschrieben werden soll mit Leerzeichen getrennt angeben:\n");
-            scanf("%i %i %i", &m, &s, &d);
+            scanf("%i %lf %i", &m, &s, &d);
             a.firstPos(body, bcount, s); //hier werden die ersten positionen nach dem Verlet-Algorithmus berechnet
             b.firstPos(body, bcount, s); //Dies kann unnötig geschehen
             c.firstPos(body, bcount, s);
@@ -284,9 +290,10 @@ int main() {
             printf("Bitte ein Verfahren ausw\204hlen, 0 f\201r Euler-Verfahren, 1 f\201r Verlet-Algorithmus:\n");
             int typ;
             scanf("%i", &typ);
-            unsigned m, s, d; //maximale Iteration, Schrittweite, Druckhäufigkeit
+            unsigned m, d; //maximale Iteration, Schrittweite, Druckhäufigkeit
+            double s;
             printf("Anzahl Iterationen, Schrittweite in Sekunden und jeder wie vielte Wert in die Ausgabedatei geschrieben werden soll mit Leerzeichen getrennt angeben:\n");
-            scanf("%i %i %i", &m, &s, &d);
+            scanf("%i %lf %i", &m, &s, &d);
             a.firstPos(body, bcount, s); //hier werden die ersten positionen nach dem Verlet-Algorithmus berechnet
             b.firstPos(body, bcount, s); //Dies kann unnötig geschehen
             c.firstPos(body, bcount, s);
@@ -332,9 +339,10 @@ int main() {
         printf("Bitte ein Verfahren ausw\204hlen, 0 f\201r Euler-Verfahren, 1 f\201r Verlet-Algorithmus: \n");
         int typ=0;
         scanf("%i", &typ);
-        unsigned max, sch, dru;
+        unsigned max, dru;
+        double sch;
         printf("Anzahl Iterationen, Schrittweite in Sekunden und jeder wie vielte Wert in die Ausgabedatei geschrieben werden soll mit Leerzeichen getrennt angeben:\n");
-        scanf("%i %i %i", &max, &sch, &dru);
+        scanf("%i %lf %i", &max, &sch, &dru);
         for (bi=0; bi<bcount; bi++) {
             (*body[bi]).firstPos(body, bcount, sch); //hier werden die ersten positionen nach dem Verlet-Algorithmus berechne. Dies kann unnötig geschehen
         }

@@ -73,17 +73,17 @@ using std::endl;
     }
 
     //Berechnungsmethoden der Bewegungen nach dem Euler-Verfahren
-    void Gravk::setVel(Gravk **body, int bcount, unsigned dt) {
+    void Gravk::setVel(Gravk **body, int bcount, double dt) {
         velx[1]=velx[1]+((-1)*(this->Forcex(body,bcount)*dt)/(mass));
         vely[1]=vely[1]+((-1)*(this->Forcey(body,bcount)*dt)/(mass));
     } //bcount anzahl der körper -1
-    void Gravk::newPos(unsigned dt) {
+    void Gravk::newPos(double dt) {
         posx[1]=(posx[1]+velx[1]*dt);
         posy[1]=(posy[1]+vely[1]*dt);}
     //double Gravk::test(int t) {return mass;}
 
     //Berechnung der neuen Position der Körper mit Verlet-Algorithmus
-    void Gravk::verPos(Gravk **body, int bcount, unsigned dt){
+    void Gravk::verPos(Gravk **body, int bcount, double dt){
         double help1=posx[1]; //speichert denn n-ten iterationsschritt
         double help2=posy[1];
         posx[1]=(2*(help1)-posx[0]+(-1)*Forcex(body,bcount)/(mass)*pow(dt,2)); //schreibt in den n+1-ten Iterationsschritt in den n-ten
@@ -93,7 +93,7 @@ using std::endl;
     }
 
     //Berechnung der ersten Position nach Verlet
-    void Gravk::firstPos(Gravk **body, int bcount, unsigned dt) {
+    void Gravk::firstPos(Gravk **body, int bcount, double dt) {
         posx[1]=(posx[0]+velx[0]*dt+(-0.5)*Forcex(body,bcount)/(mass)*pow(dt,2)); //x1=x0+vt+1/2at^2
         posy[1]=(posy[0]+vely[0]*dt+(-0.5)*Forcex(body,bcount)/(mass)*pow(dt,2));
     }

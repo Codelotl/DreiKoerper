@@ -142,8 +142,7 @@ int main() {
                     }
                 }
                 if (i % d == 0) {
-                    dat << a.getPosx(1) << " " << a.getPosy(1) << " " << b.getPosx(1) << " " << b.getPosy(1) << " "
-                        << c.getPosx(1) << " " << c.getPosy(1) << endl;
+                    dat << a.getPosx(1) << " " << a.getPosy(1) << " " << b.getPosx(1) << " " << b.getPosy(1) << endl;
                 }
             }
             dat.close();
@@ -371,7 +370,7 @@ int main() {
         // Falls mehr als 26 Körper
     }
     else if (bcount ==42){
-        printf("Herzlichen Gl\201ckwunsch, du hast gerade ein Easter-Egg gefunden. Aber war es das einzige?\n");
+        printf("Herzlichen Gl\201ckwunsch, du hast gerade ein Easter-Egg gefunden. Aber war es das Einzige?\n");
     }
     else if (bcount ==1337){
         printf("Nicht sicher ob Leet oder Molekularsimulation!?\n");

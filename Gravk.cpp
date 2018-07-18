@@ -18,7 +18,7 @@ using std::endl;
         vely;
         mass = 1.0;
     }
-    Gravk::~Gravk(){};
+    Gravk::~Gravk();
 
     //Set-Funktion, weißt allen Körpern Anfangswerte zu
     void Gravk::setAll(double a, double b, double c, double d, double h){ //Set Funktion um einem Körper Werte zuzuweisen

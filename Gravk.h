@@ -30,10 +30,10 @@ public:
     double distance(Gravk a); //Berechnet Abstand von zwei Körpern zur Zeit t
     double Forcex(Gravk** body, int bcount); //Berechnet Kraft in x-Richtung
     double Forcey(Gravk** body, int bcount);  //Berechnet Kraft in y-Richtung
-    void setVel(Gravk** body, int bcount, unsigned dt); //Berechnet Geschwindigkeit nach Euler
-    void newPos(unsigned dt); //Berechnet Ort nach Euler
-    void firstPos(Gravk** body, int bcount, unsigned dt); //Erste Iteration, um Verlet anwenden zu können
-    void verPos(Gravk** body, int bcount,unsigned dt); //Berechnet Ort nach Verlet
+    void setVel(Gravk** body, int bcount, double dt); //Berechnet Geschwindigkeit nach Euler
+    void newPos(double dt); //Berechnet Ort nach Euler
+    void firstPos(Gravk** body, int bcount, double dt); //Erste Iteration, um Verlet anwenden zu können
+    void verPos(Gravk** body, int bcount,double dt); //Berechnet Ort nach Verlet
     void print(); //Gibt Startparamter/n-1 Ort aus
 };
 

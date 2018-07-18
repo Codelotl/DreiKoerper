@@ -282,7 +282,7 @@ int main() {
         if (fall == 6) {
             bcount = 3;
             Gravk *body[bcount] = {&a, &b, &c}; //Hier sind die Körpernamen durch ein Array durchzählbar
-            (*body[0]).setAll( rerde, 0, 0, verde, msun);
+            (*body[0]).setAll( rerde, 0, 0, -verde, msun);
             b.setAll(rerde, rerde, 0, -verde, msun);
             c.setAll(0, rerde, verde, 0, msun);
             a.print(), b.print(), c.print(); //unsere printfunktion um die startwerte in die Konsole auszugeben
